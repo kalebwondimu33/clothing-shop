@@ -4,15 +4,29 @@ import { connect } from "react-redux";
 import "./card-drop.scss";
 import CartItem from "../cart-item/CartItem";
 import { selectCartItems } from "../../redux/cart/cartselector";
-const CardDrop = ({ cartItems }) => {
+import { useNavigate } from "react-router-dom";
+import { toggleCartHidden } from "../../redux/cart/CartAction";
+const CardDrop = ({ cartItems, history, dispatch }) => {
+  const navigate = useNavigate();
   return (
     <div className="cart-dropdown">
       <div className="cart-items">
-        {cartItems.map((cartItem) => (
-          <CartItem key={cartItem.id} item={cartItem} />
-        ))}
+        {cartItems.length ? (
+          cartItems.map((cartItem) => (
+            <CartItem key={cartItem.id} item={cartItem} />
+          ))
+        ) : (
+          <span className="empty-message">your cart is empty</span>
+        )}
       </div>
-      <Custombutton>GO TO CHECKOUT</Custombutton>
+      <Custombutton
+        onClick={() => {
+          navigate("/checkout");
+          dispatch(toggleCartHidden());
+        }}
+      >
+        GO TO CHECKOUT
+      </Custombutton>
     </div>
   );
 };
