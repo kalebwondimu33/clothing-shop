@@ -13,6 +13,7 @@ import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./redux/user/userSelector";
 import { connect } from "react-redux";
 import Checkout from "./pages/checkout/Checkout";
+
 class App extends React.Component {
   unsubscribeFromAuth = null;
   unsubscribeFromUserSnapshot = null;
